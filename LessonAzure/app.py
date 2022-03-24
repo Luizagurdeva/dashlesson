@@ -1,20 +1,32 @@
-import pandas as pd
-import plotly.express as px
-import plotly.graph_objects as go 
-
+# ***************************************
+# Imports
+# ***************************************
+# Dash
 import dash
 from dash import html
 from dash import dcc
 from dash.dependencies import Input, Output
 
+# Div.
+import pandas as pd
 import numpy as np
 import calendar
 
-import structured_data
-order = structured_data.get_data()
-df_year = structured_data.get_year()
-df_month = structured_data.get_month()
+# Plotly
+import plotly.express as px
+import plotly.graph_objects as go
 
+# ***************************************
+# Get data
+# ***************************************
+import datamodel
+order = datamodel.get_data()
+df_year = datamodel.get_year()
+df_month = datamodel.get_month()
+
+# ***************************************
+# Diagram - Employee Sales
+# ***************************************
 fig_employee = px.bar(order, 
     x='emp_name', y='total', 
     color='type', text='total', title='Sales by Employee',
@@ -23,6 +35,10 @@ fig_employee = px.bar(order,
 fig_employee.update_traces(texttemplate='%{text:.2s}', textposition='outside')
 fig_employee.update_layout(uniformtext_minsize=8, uniformtext_mode='hide', xaxis_tickangle=45)
 
+# ***************************************
+# Activate the app
+# ***************************************
+#app = dash.Dash(__name__)
 
 dash_app = dash.Dash(__name__)
 app = dash_app.server

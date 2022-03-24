@@ -1,26 +1,30 @@
-
+# Imports
 import pandas as pd
 import numpy as np
 import calendar
-import requests
-import io
 
-githubpath = 'https://raw.githubusercontent.com/Luizagurdeva/dashlesson/Delivery1'
-githubpath = requests.get("https://raw.githubusercontent.com/Luizagurdeva/dashlesson/Delivery1").content
+# ***************************************
+# Import af datamodel
+# ***************************************
 
-df_customers = pd.read_excel(githubpath + bytes("my_shop_data.xlsx"), sheet_name="customers")
-df_order = pd.read_excel(githubpath + bytes("my_shop_data.xlsx"), sheet_name="order")
-df_employee = pd.read_excel(githubpath + bytes("my_shop_data.xlsx"), sheet_name="employee")
-df_products = pd.read_excel(githubpath + bytes("my_shop_data.xlsx"), sheet_name="products")
+#githubpath = 'https://raw.githubusercontent.com/TueHellsternKea/dashdemo/main/data/'
+githubpath = "/Users/luiza/Documents/GitHub/dashlesson/LessonAzure/data/"
+
+# Import from Excel file, 4 different sheets
+df_customers = pd.read_excel(githubpath + "fake_data.xlsx", sheet_name="customers")
+df_order = pd.read_excel(githubpath + "fake_data.xlsx", sheet_name="order")
+df_employee = pd.read_excel(githubpath + "fake_data.xlsx", sheet_name="employee")
+df_products = pd.read_excel(githubpath + "fake_data.xlsx", sheet_name="products")
 
 
 def get_data():
     # Employee name
-    df_employee['employee_name'] = df_employee['firstname'] + ' ' + df_employee['lastname']
+    df_employee['emp_name'] = df_employee['firstname'] + ' ' + df_employee['lastname']
 
     # Customers name
-    df_customers['customer_name'] = df_customers['first_name'] + ' ' + df_customers['last_name']
+    df_customers['cust_name'] = df_customers['first_name'] + ' ' + df_customers['last_name']
 
+    # Data - Add: total, order, year, month
     df_order['total'] = df_order['unitprice'] * df_order['quantity']
     df_order['deliverytime'] = df_order['deliverydate'] - df_order['orderdate']
     df_order['orderyear'] = df_order['orderdate'].dt.strftime("%Y")
@@ -44,6 +48,7 @@ def get_data():
 
     # Retuner til app.py
     return order
+
 
 def get_year():
     # Year - Create a dataframe with years usede in the order dataframe
