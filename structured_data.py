@@ -5,7 +5,7 @@ import calendar
 import requests
 import io
 
-path = "/Users/luiza/Documents/GitHub/dashlesson/data/"
+path = "/Users/luiza/Documents/GitHub/dashlesson/Delivery1/data/"
 
 df_customers = pd.read_excel(path + "my_shop_data.xlsx", sheet_name="customers")
 df_order = pd.read_excel(path + "my_shop_data.xlsx", sheet_name="order")
