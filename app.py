@@ -10,8 +10,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 # Get data
-
-import structured_data
+from Delivery1 import structured_data
 order = structured_data.get_sales_data()
 df_year = structured_data.get_year()
 df_month = structured_data.get_month()

@@ -20,15 +20,15 @@ def get_sales_data():
     # Customers name
     df_customers['customer_name'] = df_customers['first_name'] + ' ' + df_customers['last_name']
 
+    df_products['product_name'] = df_products['productname']
+
     df_order['total'] = df_order['unitprice'] * df_order['quantity']
     df_order['deliverytime'] = df_order['deliverydate'] - df_order['orderdate']
     df_order['orderyear'] = df_order['orderdate'].dt.strftime("%Y")
     df_order['ordermonth'] = pd.to_datetime(df_order['orderdate'])
     df_order['ordermonth'] = df_order['ordermonth'].dt.month_name()
 
-    # ***************************************
-    # Data - Relationer
-    # ***************************************
+   
     order = pd.merge(df_order, df_products, on='product_id')
     order = pd.merge(order, df_employee, on='employee_id')
     order = pd.merge(order, df_customers, on='customer_id')
@@ -39,7 +39,7 @@ def get_sales_data():
                 'customer_id', 'customer_name', 'city', 'country',
                 'employee_id', 'employee_name', 
                 'orderdate', 'deliverydate', 'deliverytime', 'orderyear', 'ordermonth',
-                'total', 'quantity']]
+                'total', 'quantity', 'product_name']]
 
     # Retuner til app.py
     return order
