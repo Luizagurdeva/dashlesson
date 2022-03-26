@@ -9,8 +9,7 @@ import calendar
 import plotly.express as px
 import plotly.graph_objects as go
 
-# Get data
-from Delivery1 import structured_data
+import structured_data
 order = structured_data.get_sales_data()
 df_year = structured_data.get_year()
 df_month = structured_data.get_month()
@@ -101,4 +100,3 @@ def update_graph(drop_month, drop_year):
 
 if __name__ == '__main__':
     dash_app.run_server(debug=True)
-c
