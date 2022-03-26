@@ -20,7 +20,7 @@ import plotly.graph_objects as go
 # Get data
 # ***************************************
 import datamodel
-order = datamodel.get_data()
+order = datamodel.get_sales_data()
 df_year = datamodel.get_year()
 df_month = datamodel.get_month()
 
