@@ -1,9 +1,11 @@
-
+# Imports
 import pandas as pd
 import numpy as np
 import calendar
-import requests
-import io
+
+# ***************************************
+# Import af datamodel
+# ***************************************
 
 path = "/Users/luiza/Documents/GitHub/dashlesson/Delivery1/data/"
 
@@ -15,11 +17,12 @@ df_products = pd.read_excel(path + "my_shop_data.xlsx", sheet_name="products")
 
 def get_sales_data():
     # Employee name
-    df_employee['employee_name'] = df_employee['firstname'] + ' ' + df_employee['lastname']
+    df_employee['emp_name'] = df_employee['firstname'] + ' ' + df_employee['lastname']
 
     # Customers name
-    df_customers['customer_name'] = df_customers['first_name'] + ' ' + df_customers['last_name']
+    df_customers['cust_name'] = df_customers['first_name'] + ' ' + df_customers['last_name']
 
+    # Data - Add: total, order, year, month
     df_order['total'] = df_order['unitprice'] * df_order['quantity']
     df_order['deliverytime'] = df_order['deliverydate'] - df_order['orderdate']
     df_order['orderyear'] = df_order['orderdate'].dt.strftime("%Y")
@@ -36,13 +39,14 @@ def get_sales_data():
     # Order - Select colomns
     order = order[['order_id', 
                 'product_id', 'productname', 'type',
-                'customer_id', 'customer_name', 'city', 'country',
-                'employee_id', 'employee_name', 
+                'customer_id', 'cust_name', 'city', 'country',
+                'employee_id', 'emp_name', 
                 'orderdate', 'deliverydate', 'deliverytime', 'orderyear', 'ordermonth',
-                'total', 'quantity']]
+                'total']]
 
     # Retuner til app.py
     return order
+
 
 def get_year():
     # Year - Create a dataframe with years usede in the order dataframe
